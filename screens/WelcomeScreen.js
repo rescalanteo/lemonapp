@@ -1,8 +1,9 @@
 import * as React from "react";
 import {Text, View, StyleSheet, Image} from "react-native";
+import Button from "../components/Button";
 
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={styles.contentContainer}>
@@ -14,6 +15,13 @@ const WelcomeScreen = () => {
                     Little Lemon, your local Mediterranean Bistro
                 </Text>
             </View>
+            <Button 
+                onPress={() => {
+                    navigation.navigate("Subscribe")
+                }}
+            >
+                Newsletter
+            </Button>
         </View>
     );
 };

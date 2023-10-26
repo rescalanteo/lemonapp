@@ -1,14 +1,37 @@
 import * as React from "react";
-import {Text, View, StyleSheet, Image} from "react-native";
+import {Alert, Image, StyleSheet, Text, TextInput, View} from "react-native";
+import Button from "../components/Button";
+import {validateEmail} from "../utils";
 
+const SubscribeScreen = () => {
+    const [email, setEmail] = React.useState('');
+    const isEmailValid = validateEmail(email);
 
-const WelcomeScreen = () => {
     return (
-        <View>
+        <View style={styles.container}>
             <Image
                 style={styles.logo}
-                source={require("../assets/little-lemon-logo.png")}
+                source={require("../assets/little-lemon-logo-grey.png")}
             />
+            <Text style={styles.title}>
+                Subscribe to our newsletter for our latest delicious recipes!
+            </Text>
+            <TextInput
+                style = {styles.input}
+                value = {email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+                textContentType= "emailAddress"
+                placeholder="Type your email"
+            />
+            <Button
+                onPress={() => {
+                    Alert.alert("Thanks for subscribing, stay tuned!");
+                }}
+                disabled={!isEmailValid}
+            >
+                Subscribe
+            </Button>
         </View>
     );
 };
@@ -18,26 +41,27 @@ const styles = StyleSheet.create({
       flex: 1,
       padding: 24,
       backgroundColor: 'white',
-      justifyContent: 'space-between',
-    },
-    contentContainer: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
     },
     logo: {
-      height: 200,
-      width: 300,
-      resizeMode: "contain",
+        height: 100,
+        width: 300,
+        resizeMode: "contain",
+        marginBottom: 32,
     },
     title: {
-      marginTop: 48,
-      paddingVertical: 10,
-      color: "#333333",
-      textAlign: "center",
-      fontSize: 20,
-      fontWeight: "bold",
+        color: "#333333",
+        textAlign: "center",
+        fontSize: 20,
+    },
+    input:{
+        height: 40,
+        marginVertical: 24,
+        borderRadius: 8,
+        borderWidth: 1,
+        padding: 10,
+        fontSize: 16,
+        borderColor: "#EDEFEE",
     },
   });
 
-export default WelcomeScreen;
+export default SubscribeScreen;
